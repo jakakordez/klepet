@@ -99,6 +99,10 @@ $(document).ready(function() {
     for (var i=0; i < uporabniki.length; i++) {
       $('#seznam-uporabnikov').append(divElementEnostavniTekst(uporabniki[i]));
     }
+    $('#seznam-uporabnikov div').on('click', function() {
+      $("#poslji-sporocilo").val("/zasebno \""+$(this).text()+"\"");
+      $('#poslji-sporocilo').focus();
+    });
   });
 
   setInterval(function() {
@@ -112,8 +116,6 @@ $(document).ready(function() {
     procesirajVnosUporabnika(klepetApp, socket);
     return false;
   });
-  
-  
 });
 
 function dodajSmeske(vhodnoBesedilo) {
