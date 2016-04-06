@@ -5,7 +5,7 @@ function divElementEnostavniTekst(sporocilo) {
 
   if (jeSmesko || imaSlike) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
-    sporocilo = sporocilo.replace(/https?:\/\/(\S+?)\.(jpg|png|gif)/g, "<a href='$&'><img src='$&' /><a/>");
+    sporocilo = sporocilo.replace(/https?:\/\/(\S+?)\.(jpg|png|gif)/g, "<a href='$&'><img src='$&' /> $&<a/>");
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else {
     return $('<div style="font-weight: bold;"></div>').text(sporocilo);
