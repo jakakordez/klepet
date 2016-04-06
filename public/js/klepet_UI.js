@@ -2,15 +2,18 @@ function divElementEnostavniTekst(sporocilo) {
       
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
   var imaSlike = sporocilo.search(/https?:\/\/(\S+?)\.(jpg|png|gif)/g) > -1;
+  var imaVideo = sporocilo.search(/https:\/\/www\.youtube\.com\/watch\?v=(.{11})/g) > -1;
 
-  if (jeSmesko || imaSlike) {
+  if (jeSmesko || imaSlike || imaVideo) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
     sporocilo = sporocilo.replace(/https?:\/\/(\S+?)\.(jpg|png|gif)/g, "<a href='$&'><img src='$&' /> $&<a/>");
+    sporocilo = sporocilo.replace(/https:\/\/www\.youtube\.com\/watch\?v=(.{11})/g, "<iframe src='https://www.youtube.com/embed/$1' allowfullscreen></iframe> <a href='$&'>$&</a>");
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else {
     return $('<div style="font-weight: bold;"></div>').text(sporocilo);
   }
 }
+
 
 function divElementHtmlTekst(sporocilo) {
   return $('<div></div>').html('<i>' + sporocilo + '</i>');
